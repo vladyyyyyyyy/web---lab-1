@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/main.css">
+  <title>lab1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="js/Init.js"></script>
+</head>
+
+<body>
+<table class="wrapper">
+  <colgroup>
+    <col span="1" style="width: 27%;">
+    <col span="1" style="width: 33%;">
+    <col span="1" style="width: 40%;">
+  </colgroup>
+  <tbody>
+  <tr>
+    <td class="header" colspan="3">
+      Klimenko Vladislav Igorevich
+      3403
+      P3224
+    </td>
+  </tr>
+  <tr>
+    <td class='horizontal-separator' colspan='3'></td>
+  </tr>
+  <tr>
+    <td class="plot">
+      <svg width="300" height="300">
+        <!--Координатные оси-->
+        <line x1="0" x2="300" y1="150" y2="150"></line>
+        <line x1="150" x2="150" y1="0" y2="300"></line>
+        <!--Стрелочки-->
+        <polygon points="150,0 145,15 155,15"></polygon>
+        <polygon points="300,150 285,145 285,155"></polygon>
+        <!--Прямоугольник в первой четверти-->
+        <polygon points="150,150 250,150 250,200 150,200"></polygon>
+        <!--Четверть круга в третьей четверти-->
+        <path d="M150,50 A100,100 90 0,0 50,150 L 150,150 Z"></path>
+        <!--Треугольник в четвертой четверти-->
+        <polygon points="150,150 200,150 150,50"></polygon>
+        <!-- Подписи к осям -->
+        <text x="285" y="135">X</text>
+        <text x="160" y="15">Y</text>
+        <!-- Метки для значений R на оси X -->
+        <line x1="50" x2="50" y1="140" y2="160"></line>
+        <line x1="100" x2="100" y1="140" y2="160"></line>
+        <line x1="200" x2="200" y1="140" y2="160"></line>
+        <line x1="250" x2="250" y1="140" y2="160"></line>
+        <!-- Метки для значений R на оси Y -->
+        <line x1="140" x2="160" y1="50" y2="50"></line>
+        <line x1="140" x2="160" y1="100" y2="100"></line>
+        <line x1="140" x2="160" y1="200" y2="200"></line>
+        <line x1="140" x2="160" y1="250" y2="250"></line>
+        <!-- Значения R на оси X -->
+        <text x="50" y="130" text-anchor="middle" id="-r">-R</text>
+        <text x="98" y="130" text-anchor="middle" id="-r2">-R/2</text>
+        <text x="200" y="130" text-anchor="middle" id="r2">R/2</text>
+        <text x="250" y="130" text-anchor="middle" id="r">R</text>
+        <!-- Значения R на оси Y -->
+        <text x="170" y="52.5" id="r">R</text>
+        <text x="170" y="102.5" id="r2">R/2</text>
+        <text x="170" y="202.5" id="-r2">-R/2</text>
+        <text x="170" y="252.5" id="-r">-R</text>
+      </svg>
+    </td>
+    <td class="user_input">
+      <form id="form" name="form" onsubmit="receiveSubmit(); return false;">
+        <table class="values">
+
+          <tr class="y_value">
+            <td class="btn_group">
+              <label for="y_value">Choose Y:</label>
+              <input type="checkbox" value="-4" id="y_minus4">
+              <label for="y_minus4">-4</label>
+              <input type="checkbox" value="-3" id="y_minus3">
+              <label for="y_minus3">-3</label>
+              <input type="checkbox" value="-2" id="y_minus2">
+              <label for="y_minus2">-2</label>
+              <input type="checkbox" value="-1" id="y_minus1">
+              <label for="y_minus1">-1</label>
+              <input type="checkbox" value="0" id="y_0">
+              <label for="y_0">0</label>
+              <input type="checkbox" value="1" id="y_1">
+              <label for="y_1">1</label>
+              <input type="checkbox" value="2" id="y_2">
+              <label for="y_2">2</label>
+              <input type="checkbox" value="3" id="y_3">
+              <label for="y_3">3</label>
+              <input type="checkbox" value="-4" name="y_values" id="y_4">
+              <label for="y_4">4</label>
+              <input type="hidden" name="y_value" id="y_value">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <label for="x_value">Choose X: </label>
+              <input type="text" id="x_value" name="x_value" onchange="checkInput()" oninput="checkInput()">
+            </td>
+          </tr>
+
+          <tr>
+            <td id="r_value">
+              <label for="r_value">Choose R:</label>
+              <button type="button" name="r_value" value="1" onclick="changeR(this)">1</button>
+              <button type="button" name="r_value" value="1.5" onclick="changeR(this)">1.5</button>
+              <button type="button" name="r_value" value="2" onclick="changeR(this)">2</button>
+              <button type="button" name="r_value" value="2.5" onclick="changeR(this)">2.5</button>
+              <button type="button" name="r_value" value="3" onclick="changeR(this)">3</button>
+            </td>
+          </tr>
+
+          <tr class="buttons">
+            <td>
+              <input id="reset-input" type="reset" value="Clean input" onclick="cleanInput()">
+              <input id="submit" type="submit" value="Check hit">
+            </td>
+          </tr>
+          <tr class="validation_info">
+
+          </tr>
+        </table>
+      </form>
+    </td>
+    <td class="table">
+      <table id="table">
+        <thead>
+        <tr>
+          <th scope="col">Current time</th>
+          <th scope="col">Computation time</th>
+          <th scope="col">X</th>
+          <th scope="col">Y</th>
+          <th scope="col">R</th>
+          <th scope="col">Result</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="6">
+            <input class="reset-table" id="reset-table" type="reset" value="Clean table" onclick="cleanTable()">
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="js/Clean.js"></script>
+<script src="js/Update.js"></script>
+<script src="js/Validator.js"></script>
+<script src="js/X.js"></script>
+<script src="js/Y.js"></script>
+<script src="js/R.js"></script>
+</html>
+
